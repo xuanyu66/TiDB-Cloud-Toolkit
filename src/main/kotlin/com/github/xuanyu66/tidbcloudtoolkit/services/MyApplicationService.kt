@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.xuanyu66.tidbcloudtoolkit.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.xuanyu66.tidbcloudtoolkit.MyBundle
 
 class MyApplicationService {
 
