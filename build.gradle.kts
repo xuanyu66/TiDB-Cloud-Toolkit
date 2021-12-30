@@ -21,7 +21,15 @@ version = properties("pluginVersion")
 
 // Configure project's dependencies
 repositories {
+    mavenLocal()
     mavenCentral()
+}
+
+dependencies {
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("org.seleniumhq.selenium:selenium-java:4.1.1")
+    implementation("io.github.bonigarcia:webdrivermanager:5.0.3")
+    implementation("org.json:json:20211205")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
