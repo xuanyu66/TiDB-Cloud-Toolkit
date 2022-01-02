@@ -5,24 +5,21 @@ import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.TiDBCloudApiConstan
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Cluster;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.exception.ToolkitException;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.util.GsonUtil;
+import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Objects;
 
-public class ToolkitService {
+public class TiDBCloundToolkitService {
 
     private BaseHttpClient baseHttpClient;
 
-    private ToolkitService() {
+    private TiDBCloundToolkitService() {
     }
 
-    public ToolkitService(String name, String password) {
-        baseHttpClient = BaseHttpClient.newBuilder().withUserName(name)
-                .withPassword(password)
-                .build();
+    public TiDBCloundToolkitService(String name, String password) {
+        refreshToken(name, password);
     }
 
     public void refreshToken(String name, String password) {
@@ -34,21 +31,33 @@ public class ToolkitService {
 
     private String getOrg() {
         try {
-            String url = urlGenerate(TiDBCloudApiConstant.GET_ORGS);
+            //String url = urlGenerate(TiDBCloudApiConstant.GET_ORGS);
+            HttpUrl url = new HttpUrl.Builder()
+                    .scheme("https")
+                    .host(TiDBCloudApiConstant.HOST)
+                    .addPathSegments(TiDBCloudApiConstant.GET_ORGS)
+                    .build();
+
             Request request = new Request.Builder()
                     .url(url)
                     .get()
                     .build();
             Response response = baseHttpClient.request(request);
-            String result = Objects.requireNonNull(response.body()).string();
-            return GsonUtil.getAsString(result, "id");
+            return Objects.requireNonNull(response.body()).string();
         } catch (Exception e) {
             throw new ToolkitException("getOrg fail", e);
         }
     }
 
     public String getProject() {
-        String url = urlGenerate(TiDBCloudApiConstant.GET_PROJECTS, getOrg());
+        String orgId = GsonUtil.getAsString(getOrg(), "id");
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(TiDBCloudApiConstant.HOST)
+                .addPathSegments(TiDBCloudApiConstant.ORGS)
+                .addPathSegment(orgId)
+                .addPathSegment("projects")
+                .build();
         return null;
     }
 
@@ -75,15 +84,4 @@ public class ToolkitService {
     private void getMyIP() {
 
     }
-
-    private String urlGenerate(String api, String... args) {
-        String url = MessageFormat.format(api, (Object) args);
-        return TiDBCloudApiConstant.CLOUDURL + url;
-    }
-
-    public static void main(String[] args) {
-        ToolkitService r = new ToolkitService("", "");
-        System.out.println(r.getOrg());
-    }
-
 }
