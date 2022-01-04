@@ -32,12 +32,11 @@ public class AuthTokenResolver {
 
     loginTiDBCloud(user, password, driver);
 
-    // wait the page to refresh
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    // wait the page to redirect
+    WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10),
+        Duration.ofMillis(500));
+    webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".ui.button")));
+
     String tokens = parseAuthToken(driver);
 
     driver.quit();
