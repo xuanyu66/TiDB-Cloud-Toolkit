@@ -1,5 +1,6 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend;
 
+import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.TiDBCloudApiConstant;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
 import java.util.logging.Level;
@@ -17,8 +18,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AuthTokenResolver {
-
-  private static final String AUTH_URL = "https://tidbcloud.com/";
 
   static {
     WebDriverManager.chromedriver().setup();
@@ -74,7 +73,7 @@ public class AuthTokenResolver {
   }
 
   private static void loginTiDBCloud(String user, String password, ChromeDriver driver) {
-    driver.get(AUTH_URL);
+    driver.get(TiDBCloudApiConstant.AUTH_URL);
     WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10),
         Duration.ofMillis(500));
     webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
