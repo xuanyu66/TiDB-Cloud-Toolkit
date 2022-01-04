@@ -1,18 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.xuanyu66.tidbcloudtoolkit</id>
-    <name>TiDB-cloud-Toolkit</name>
+    <name>TiDBCloudToolkit</name>
     <vendor>xuanyu66</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.xuanyu66.tidbcloudtoolkit.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.xuanyu66.tidbcloudtoolkit.services.MyProjectService"/>
+        <toolWindow factoryClass="com.github.xuanyu66.tidbcloudtoolkit.plugin.factory.TiCloudFactory" id="TidbCloudToolkit" anchor="right" secondary="false"/>
+        <projectConfigurable instance="com.github.xuanyu66.tidbcloudtoolkit.plugin.factory.SettingFactory" id="tidb-cloud-toolkit.setting" displayName="TiDB Cloud Toolkit"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.xuanyu66.tidbcloudtoolkit.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="TestAction"
+                class="com.github.xuanyu66.tidbcloudtoolkit.plugin.TestAction"
+                text="TestAction" description="Test">
+            <add-to-group group-id="FileMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
