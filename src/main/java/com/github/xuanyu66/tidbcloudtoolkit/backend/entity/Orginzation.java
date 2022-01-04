@@ -1,202 +1,194 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.entity;
 
 public class Orginzation {
-    private String id;
 
-    private String name;
+  private String id;
+  private String name;
+  private String created_at;
+  private String email;
+  private String country;
+  private int timezone;
+  private String status;
+  private String plan;
+  private String total_credit;
+  private String remaining_credit;
+  private int active_clusters_count;
+  private boolean has_discount;
+  private String discount_description;
+  private double discount;
+  private boolean can_replication;
+  private boolean acknowledge_cn_policy;
+  private int free_clusters_count;
+  private boolean has_tried_dev_tier;
+  private String third_party_account_provider;
+  private String third_party_account_code;
+  private int whitelist_flag;
 
-    private String created_at;
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    private String email;
+  public String getId() {
+    return this.id;
+  }
 
-    private String country;
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    private int timezone;
+  public String getName() {
+    return this.name;
+  }
 
-    private String status;
+  public void setCreated_at(String created_at) {
+    this.created_at = created_at;
+  }
 
-    private String plan;
+  public String getCreated_at() {
+    return this.created_at;
+  }
 
-    private String total_credit;
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    private String remaining_credit;
-    private int active_clusters_count;
-    private boolean has_discount;
-    private String discount_description;
-    private double discount;
-    private boolean can_replication;
-    private boolean acknowledge_cn_policy;
-    private int free_clusters_count;
-    private boolean has_tried_dev_tier;
-    private String third_party_account_provider;
-    private String third_party_account_code;
-    private int whitelist_flag;
+  public String getEmail() {
+    return this.email;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setCountry(String country) {
+    this.country = country;
+  }
 
-    public String getId() {
-        return this.id;
-    }
+  public String getCountry() {
+    return this.country;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setTimezone(int timezone) {
+    this.timezone = timezone;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  public int getTimezone() {
+    return this.timezone;
+  }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    public String getCreated_at() {
-        return this.created_at;
-    }
+  public String getStatus() {
+    return this.status;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setPlan(String plan) {
+    this.plan = plan;
+  }
 
-    public String getEmail() {
-        return this.email;
-    }
+  public String getPlan() {
+    return this.plan;
+  }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+  public void setTotal_credit(String total_credit) {
+    this.total_credit = total_credit;
+  }
 
-    public String getCountry() {
-        return this.country;
-    }
+  public String getTotal_credit() {
+    return this.total_credit;
+  }
 
-    public void setTimezone(int timezone) {
-        this.timezone = timezone;
-    }
+  public void setRemaining_credit(String remaining_credit) {
+    this.remaining_credit = remaining_credit;
+  }
 
-    public int getTimezone() {
-        return this.timezone;
-    }
+  public String getRemaining_credit() {
+    return this.remaining_credit;
+  }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public void setActive_clusters_count(int active_clusters_count) {
+    this.active_clusters_count = active_clusters_count;
+  }
 
-    public String getStatus() {
-        return this.status;
-    }
+  public int getActive_clusters_count() {
+    return this.active_clusters_count;
+  }
 
-    public void setPlan(String plan) {
-        this.plan = plan;
-    }
+  public void setHas_discount(boolean has_discount) {
+    this.has_discount = has_discount;
+  }
 
-    public String getPlan() {
-        return this.plan;
-    }
+  public boolean getHas_discount() {
+    return this.has_discount;
+  }
 
-    public void setTotal_credit(String total_credit) {
-        this.total_credit = total_credit;
-    }
+  public void setDiscount_description(String discount_description) {
+    this.discount_description = discount_description;
+  }
 
-    public String getTotal_credit() {
-        return this.total_credit;
-    }
+  public String getDiscount_description() {
+    return this.discount_description;
+  }
 
-    public void setRemaining_credit(String remaining_credit) {
-        this.remaining_credit = remaining_credit;
-    }
+  public void setDiscount(double discount) {
+    this.discount = discount;
+  }
 
-    public String getRemaining_credit() {
-        return this.remaining_credit;
-    }
+  public double getDiscount() {
+    return this.discount;
+  }
 
-    public void setActive_clusters_count(int active_clusters_count) {
-        this.active_clusters_count = active_clusters_count;
-    }
+  public void setCan_replication(boolean can_replication) {
+    this.can_replication = can_replication;
+  }
 
-    public int getActive_clusters_count() {
-        return this.active_clusters_count;
-    }
+  public boolean getCan_replication() {
+    return this.can_replication;
+  }
 
-    public void setHas_discount(boolean has_discount) {
-        this.has_discount = has_discount;
-    }
+  public void setAcknowledge_cn_policy(boolean acknowledge_cn_policy) {
+    this.acknowledge_cn_policy = acknowledge_cn_policy;
+  }
 
-    public boolean getHas_discount() {
-        return this.has_discount;
-    }
+  public boolean getAcknowledge_cn_policy() {
+    return this.acknowledge_cn_policy;
+  }
 
-    public void setDiscount_description(String discount_description) {
-        this.discount_description = discount_description;
-    }
+  public void setFree_clusters_count(int free_clusters_count) {
+    this.free_clusters_count = free_clusters_count;
+  }
 
-    public String getDiscount_description() {
-        return this.discount_description;
-    }
+  public int getFree_clusters_count() {
+    return this.free_clusters_count;
+  }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
+  public void setHas_tried_dev_tier(boolean has_tried_dev_tier) {
+    this.has_tried_dev_tier = has_tried_dev_tier;
+  }
 
-    public double getDiscount() {
-        return this.discount;
-    }
+  public boolean getHas_tried_dev_tier() {
+    return this.has_tried_dev_tier;
+  }
 
-    public void setCan_replication(boolean can_replication) {
-        this.can_replication = can_replication;
-    }
+  public void setThird_party_account_provider(String third_party_account_provider) {
+    this.third_party_account_provider = third_party_account_provider;
+  }
 
-    public boolean getCan_replication() {
-        return this.can_replication;
-    }
+  public String getThird_party_account_provider() {
+    return this.third_party_account_provider;
+  }
 
-    public void setAcknowledge_cn_policy(boolean acknowledge_cn_policy) {
-        this.acknowledge_cn_policy = acknowledge_cn_policy;
-    }
+  public void setThird_party_account_code(String third_party_account_code) {
+    this.third_party_account_code = third_party_account_code;
+  }
 
-    public boolean getAcknowledge_cn_policy() {
-        return this.acknowledge_cn_policy;
-    }
+  public String getThird_party_account_code() {
+    return this.third_party_account_code;
+  }
 
-    public void setFree_clusters_count(int free_clusters_count) {
-        this.free_clusters_count = free_clusters_count;
-    }
+  public void setWhitelist_flag(int whitelist_flag) {
+    this.whitelist_flag = whitelist_flag;
+  }
 
-    public int getFree_clusters_count() {
-        return this.free_clusters_count;
-    }
-
-    public void setHas_tried_dev_tier(boolean has_tried_dev_tier) {
-        this.has_tried_dev_tier = has_tried_dev_tier;
-    }
-
-    public boolean getHas_tried_dev_tier() {
-        return this.has_tried_dev_tier;
-    }
-
-    public void setThird_party_account_provider(String third_party_account_provider) {
-        this.third_party_account_provider = third_party_account_provider;
-    }
-
-    public String getThird_party_account_provider() {
-        return this.third_party_account_provider;
-    }
-
-    public void setThird_party_account_code(String third_party_account_code) {
-        this.third_party_account_code = third_party_account_code;
-    }
-
-    public String getThird_party_account_code() {
-        return this.third_party_account_code;
-    }
-
-    public void setWhitelist_flag(int whitelist_flag) {
-        this.whitelist_flag = whitelist_flag;
-    }
-
-    public int getWhitelist_flag() {
-        return this.whitelist_flag;
-    }
+  public int getWhitelist_flag() {
+    return this.whitelist_flag;
+  }
 }
