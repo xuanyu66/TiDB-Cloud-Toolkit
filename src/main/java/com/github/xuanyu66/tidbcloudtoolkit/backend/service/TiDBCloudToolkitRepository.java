@@ -2,6 +2,11 @@ package com.github.xuanyu66.tidbcloudtoolkit.backend.service;
 
 import com.github.xuanyu66.tidbcloudtoolkit.backend.BaseHttpClient;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.TiDBCloudApiConstant;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterList;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Orginzation;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ProjectList;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.exception.ToolkitException;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.util.GsonUtil;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -26,7 +31,7 @@ public class TiDBCloudToolkitRepository {
                 .build();
     }
 
-    public String getOrg() throws IOException {
+    public Orginzation getOrg() throws IOException {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
                 .host(TiDBCloudApiConstant.HOST)
@@ -34,10 +39,11 @@ public class TiDBCloudToolkitRepository {
                 .addPathSegments(TiDBCloudApiConstant.GET_ORGS)
                 .build();
 
-        return getResponse(url);
+        String json = getResponse(url);
+        return GsonUtil.from(json, Orginzation.class);
     }
 
-    public String getProjects(String orgId) throws IOException {
+    public ProjectList getProjects(String orgId) throws IOException {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
                 .host(TiDBCloudApiConstant.HOST)
@@ -47,10 +53,11 @@ public class TiDBCloudToolkitRepository {
                 .addPathSegment("projects")
                 .build();
 
-        return getResponse(url);
+        String json = getResponse(url);
+        return GsonUtil.from(json, ProjectList.class);
     }
 
-    public String getClusters(String orgId, String projectId) throws IOException {
+    public ClusterList getClusters(String orgId, String projectId) throws IOException {
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
                 .host(TiDBCloudApiConstant.HOST)
@@ -62,7 +69,8 @@ public class TiDBCloudToolkitRepository {
                 .addPathSegment("clusters")
                 .build();
 
-        return getResponse(url);
+        String json = getResponse(url);
+        return GsonUtil.from(json, ClusterList.class);
     }
 
     public boolean createCluster(String orgId, String projectId, String json) throws IOException {
@@ -83,6 +91,10 @@ public class TiDBCloudToolkitRepository {
                 .build();
 
         Response response = baseHttpClient.request(request);
+
+        if (!response.isSuccessful()) {
+            throw new ToolkitException(response.body().string());
+        }
         return response.isSuccessful();
     }
 
@@ -122,6 +134,9 @@ public class TiDBCloudToolkitRepository {
                 .build();
 
         Response response = baseHttpClient.request(request);
+        if (!response.isSuccessful()) {
+            throw new ToolkitException(response.body().string());
+        }
         return response.isSuccessful();
     }
 
@@ -145,6 +160,9 @@ public class TiDBCloudToolkitRepository {
                 .build();
 
         Response response = baseHttpClient.request(request);
+        if (!response.isSuccessful()) {
+            throw new ToolkitException(response.body().string());
+        }
         return response.isSuccessful();
     }
 

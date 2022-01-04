@@ -1,86 +1,99 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.entity;
 
+import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.RegionEnum;
+
 public class ClusterVO {
 
-    private String id;
+    private String org_id;
+    private String project_id;
+    private String provider = "aws";
+    //required
     private String name;
-    private String status;
-    private String secondary_status;
-    private String version;
-    private String provider;
-    private String region;
-    private String profile_name;
-    private String created_at;
+    //required
+    private String root_password;
+    private String region = RegionEnum.REGION.getName();
+    private String profile_name = "s1.dev";
+    private int tidb_count = 1;
+    private int tikv_count = 1;
+    private int tiflash_count = 1;
 
-    public void setId(String id) {
-        this.id = id;
+    public String getOrg_id() {
+        return org_id;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setSecondary_status(String secondary_status) {
-        this.secondary_status = secondary_status;
-    }
-
-    public String getSecondary_status() {
-        return secondary_status;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public String getProject_id() {
+        return project_id;
     }
 
     public String getProvider() {
         return provider;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public String getName() {
+        return name;
+    }
+
+    public String getRoot_password() {
+        return root_password;
     }
 
     public String getRegion() {
         return region;
     }
 
-    public void setProfile_name(String profile_name) {
-        this.profile_name = profile_name;
-    }
-
     public String getProfile_name() {
         return profile_name;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public int getTidb_count() {
+        return tidb_count;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public int getTikv_count() {
+        return tikv_count;
+    }
+
+    public int getTiflash_count() {
+        return tiflash_count;
+    }
+
+    public void setOrg_id(String org_id) {
+        this.org_id = org_id;
+    }
+
+    public void setProject_id(String project_id) {
+        this.project_id = project_id;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRoot_password(String root_password) {
+        this.root_password = root_password;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setProfile_name(String profile_name) {
+        this.profile_name = profile_name;
+    }
+
+    public void setTidb_count(int tidb_count) {
+        this.tidb_count = tidb_count;
+    }
+
+    public void setTikv_count(int tikv_count) {
+        this.tikv_count = tikv_count;
+    }
+
+    public void setTiflash_count(int tiflash_count) {
+        this.tiflash_count = tiflash_count;
     }
 }
