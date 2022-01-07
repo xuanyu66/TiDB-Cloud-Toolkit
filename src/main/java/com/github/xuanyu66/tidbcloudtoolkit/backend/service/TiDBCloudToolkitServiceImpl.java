@@ -1,12 +1,20 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.service;
 
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.*;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Cidr;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Cluster;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterList;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Orginzation;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ProjectList;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Traffic;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.exception.ToolkitException;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.util.GsonUtil;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
@@ -23,11 +31,17 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
   }
 
   @Override
-  public Cluster getCluster(ClustersSummary clustersSummary) {
+  public ClusterWrapper getCluster(ClustersSummary clustersSummary) {
     try {
       String json = tiDBCloudToolkitRepository.getClusterDetail(clustersSummary.getOrgId(),
           clustersSummary.getProjectId(), clustersSummary.getClusterId());
-      return GsonUtil.from(json, Cluster.class);
+      Cluster cluster = GsonUtil.from(json, Cluster.class);
+      ClustersSummary clustersSummary1 = new ClustersSummary();
+      clustersSummary1.setOrgId(clustersSummary.getOrgId());
+      clustersSummary1.setProjectId(clustersSummary.getOrgId());
+      clustersSummary1.setClusterId(clustersSummary.getClusterId());
+
+      return new ClusterWrapper(clustersSummary1, cluster);
     } catch (Exception e) {
       throw new ToolkitException("getCluster fail", e);
     }
@@ -83,7 +97,7 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
   }
 
   @Override
-  public List<Cluster> listClusters() throws IOException {
+  public List<ClusterWrapper> listCluster() throws IOException {
     Orginzation org = tiDBCloudToolkitRepository.getOrg();
     String orgId = org.getId();
 
@@ -92,6 +106,12 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
 
     ClusterList clusters = tiDBCloudToolkitRepository.getClusters(orgId, projectId);
 
-    return clusters.getItems();
+    return clusters.getItems().stream().map(cluster -> {
+      ClustersSummary clustersSummary = new ClustersSummary();
+      clustersSummary.setOrgId(orgId);
+      clustersSummary.setProjectId(projectId);
+      clustersSummary.setClusterId(cluster.getId());
+      return new ClusterWrapper(clustersSummary, cluster);
+    }).collect(Collectors.toList());
   }
 }

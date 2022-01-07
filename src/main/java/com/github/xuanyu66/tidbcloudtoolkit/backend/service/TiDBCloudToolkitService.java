@@ -1,7 +1,7 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.service;
 
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Cluster;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
 import java.io.IOException;
 import java.util.List;
@@ -20,7 +20,7 @@ public interface TiDBCloudToolkitService {
    *
    * @return
    */
-  Cluster getCluster(ClustersSummary clustersSummary);
+  ClusterWrapper getCluster(ClustersSummary clustersSummary);
 
   /**
    * create Developer Tier Cluster
@@ -51,5 +51,5 @@ public interface TiDBCloudToolkitService {
    *
    * @return
    */
-  List<Cluster> listClusters() throws IOException;
+  List<ClusterWrapper> listCluster() throws IOException;
 }
