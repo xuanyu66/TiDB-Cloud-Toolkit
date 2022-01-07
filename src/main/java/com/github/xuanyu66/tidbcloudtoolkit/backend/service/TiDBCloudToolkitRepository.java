@@ -18,9 +18,6 @@ public class TiDBCloudToolkitRepository {
 
   private final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-  private TiDBCloudToolkitRepository() {
-  }
-
   public TiDBCloudToolkitRepository(String name, String password) {
     refreshToken(name, password);
   }
