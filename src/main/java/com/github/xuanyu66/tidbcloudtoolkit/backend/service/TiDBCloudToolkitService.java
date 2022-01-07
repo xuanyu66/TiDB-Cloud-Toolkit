@@ -15,6 +15,8 @@ public interface TiDBCloudToolkitService {
    */
   void refreshToken(String name, String password);
 
+  void refreshToken(String token);
+
   /**
    * get Developer Tier Cluster detail
    *
