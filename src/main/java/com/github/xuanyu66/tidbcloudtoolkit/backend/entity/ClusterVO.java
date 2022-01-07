@@ -4,8 +4,6 @@ import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.RegionEnum;
 
 public class ClusterVO {
 
-  private String org_id;
-  private String project_id;
   private String provider = "aws";
   //required
   private String name;
@@ -16,14 +14,6 @@ public class ClusterVO {
   private int tidb_count = 1;
   private int tikv_count = 1;
   private int tiflash_count = 1;
-
-  public String getOrg_id() {
-    return org_id;
-  }
-
-  public String getProject_id() {
-    return project_id;
-  }
 
   public String getProvider() {
     return provider;
@@ -55,14 +45,6 @@ public class ClusterVO {
 
   public int getTiflash_count() {
     return tiflash_count;
-  }
-
-  public void setOrg_id(String org_id) {
-    this.org_id = org_id;
-  }
-
-  public void setProject_id(String project_id) {
-    this.project_id = project_id;
   }
 
   public void setProvider(String provider) {

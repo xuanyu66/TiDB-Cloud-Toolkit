@@ -1,16 +1,26 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.service;
 
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Cluster;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import java.io.IOException;
+import java.util.List;
 
 public interface TiDBCloudToolkitService {
+
+  /**
+   * refresh token if token expired
+   *
+   * @return
+   */
+  void refreshToken(String name, String password);
 
   /**
    * get Developer Tier Cluster detail
    *
    * @return
    */
-  Cluster getClusterDetail();
+  ClusterWrapper getCluster(ClustersSummary clustersSummary);
 
   /**
    * create Developer Tier Cluster
@@ -26,7 +36,7 @@ public interface TiDBCloudToolkitService {
    *
    * @return
    */
-  boolean deleteCluster();
+  boolean deleteCluster(ClustersSummary clustersSummary);
 
   /**
    * TrafficFilter config the ip which can request db
@@ -34,5 +44,12 @@ public interface TiDBCloudToolkitService {
    * @param all true means all ip can request db false means local ip can request db
    * @return
    */
-  boolean setTrafficFilter(boolean all);
+  boolean setTrafficFilter(boolean all, ClustersSummary clustersSummary);
+
+  /**
+   * return all list clusters
+   *
+   * @return
+   */
+  List<ClusterWrapper> listCluster() throws IOException;
 }
