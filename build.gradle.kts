@@ -33,6 +33,7 @@ dependencies {
     implementation("io.github.bonigarcia:webdrivermanager:5.0.3")
     implementation("org.json:json:20211205")
     implementation("org.apache.commons:commons-lang3:3.12.0")
+    implementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
