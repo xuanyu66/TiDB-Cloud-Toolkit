@@ -10,7 +10,8 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.project.Project;
+import java.io.IOException;
+import java.util.Collections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,5 +64,12 @@ public class DataService implements PersistentStateComponent<DataState> {
     return toolkitService.createCluster(GsonUtil.from(cluster, ClusterVO.class));
   }
 
-
+  public List<ClusterWrapper> listClusters() {
+    try {
+      return toolkitService.listCluster();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return Collections.emptyList();
+  }
 }
