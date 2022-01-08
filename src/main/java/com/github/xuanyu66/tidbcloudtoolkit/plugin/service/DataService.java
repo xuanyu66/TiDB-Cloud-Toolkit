@@ -59,8 +59,8 @@ public class DataService implements PersistentStateComponent<DataState> {
     toolkitService = new TiDBCloudToolkitServiceImpl(name, password);
   }
 
-  public boolean createCluster(String cluster) {
-    return toolkitService.createCluster(GsonUtil.from(cluster, ClusterVO.class));
+  public boolean createCluster(ClusterVO clusterVO) {
+    return toolkitService.createCluster(clusterVO);
   }
 
 

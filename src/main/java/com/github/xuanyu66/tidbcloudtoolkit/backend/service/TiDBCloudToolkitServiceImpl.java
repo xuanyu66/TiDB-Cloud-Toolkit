@@ -58,7 +58,7 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
 
       return tiDBCloudToolkitRepository.createCluster(orgId, projectId, GsonUtil.to(cluster));
     } catch (Exception e) {
-      throw new ToolkitException("createCluster fail", e);
+      throw new ToolkitException("createCluster fail" + e.getMessage(), e);
     }
 
   }
