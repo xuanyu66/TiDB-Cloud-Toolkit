@@ -9,21 +9,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiFile;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class TestAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
         // TODO: insert action logic here
-        TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("cs68614@gmail.com", "Xiaosong66");
+    //    TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("cs68614@gmail.com", "Xiaosong66");
 
-        try {
-            for (ClusterWrapper clusterWrapper : toolkitService.listCluster()) {
-                System.out.println(clusterWrapper.getCluster().getId());
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
         Project project = e.getData(PlatformDataKeys.PROJECT);
         PsiFile psiFile = e.getData(PlatformDataKeys.PSI_FILE);
         assert psiFile != null;
