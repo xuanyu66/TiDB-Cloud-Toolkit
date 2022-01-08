@@ -1,5 +1,6 @@
 package com.github.xuanyu66.tidbcloudtoolkit.plugin.ui;
 
+import com.github.xuanyu66.tidbcloudtoolkit.plugin.service.DataService;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts;
@@ -13,10 +14,11 @@ public class SettingUI implements Configurable {
     private JPanel mainPanel;
     private JTextField usernameTextField;
     private JTextField passwordTextField;
-    private JButton testConnectionButton;
     private JTextField tokenTextField;
 
     private TiCloudUI tiCloudUI;
+
+    private DataService dataService;
 
     /**
      * test connection
@@ -24,12 +26,6 @@ public class SettingUI implements Configurable {
      */
     public SettingUI(TiCloudUI tiCloudUI){
         this.tiCloudUI = tiCloudUI;
-        testConnectionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
 
@@ -66,7 +62,8 @@ public class SettingUI implements Configurable {
      */
     @Override
     public void apply() throws ConfigurationException {
-        String tokenStr = tokenTextField.getText().trim();
-        System.out.println(tokenStr);
+        String userName = getUsername().getText().trim();
+        String password = getPassword().getText().trim();
+        DataService.getDataService().login(userName,password);
     }
 }
