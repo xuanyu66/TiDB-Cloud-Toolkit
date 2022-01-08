@@ -22,15 +22,6 @@ public class TiDBCloudToolkitRepository {
     refreshToken(name, password);
   }
 
-  public TiDBCloudToolkitRepository(String token) {
-    refreshToken(token);
-  }
-
-  public void refreshToken(String token) {
-    baseHttpClient = BaseHttpClient.newBuilder().withToken(token)
-        .build();
-  }
-
   public void refreshToken(String name, String password) {
     baseHttpClient = BaseHttpClient.newBuilder().withUserName(name)
         .withPassword(password)

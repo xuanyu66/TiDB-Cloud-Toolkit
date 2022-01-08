@@ -25,19 +25,9 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
     tiDBCloudToolkitRepository = new TiDBCloudToolkitRepository(name, password);
   }
 
-  public TiDBCloudToolkitServiceImpl(String token) {
-    tiDBCloudToolkitRepository = new TiDBCloudToolkitRepository(token);
-  }
-
-  @Deprecated
   @Override
   public void refreshToken(String name, String password) {
     tiDBCloudToolkitRepository.refreshToken(name, password);
-  }
-
-  @Override
-  public void refreshToken(String token) {
-    tiDBCloudToolkitRepository.refreshToken(token);
   }
 
   @Override
