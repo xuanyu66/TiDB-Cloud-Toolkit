@@ -4,17 +4,16 @@ import com.github.xuanyu66.tidbcloudtoolkit.plugin.service.DataService;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingUI implements Configurable {
     private JPanel mainPanel;
     private JTextField usernameTextField;
-    private JTextField passwordTextField;
-    private JTextField tokenTextField;
+    private JPasswordField passwordTextField;
 
     private TiCloudUI tiCloudUI;
 
@@ -37,7 +36,7 @@ public class SettingUI implements Configurable {
         return usernameTextField;
     }
 
-    public JTextField getPassword() {
+    public JPasswordField getPassword() {
         return passwordTextField;
     }
 
@@ -63,7 +62,7 @@ public class SettingUI implements Configurable {
     @Override
     public void apply() throws ConfigurationException {
         String userName = getUsername().getText().trim();
-        String password = getPassword().getText().trim();
+        String password = new String(getPassword().getPassword()).trim();
         DataService.getDataService().login(userName,password);
     }
 }
