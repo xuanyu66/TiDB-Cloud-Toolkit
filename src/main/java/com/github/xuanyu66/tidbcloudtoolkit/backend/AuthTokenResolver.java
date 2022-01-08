@@ -32,7 +32,7 @@ public class AuthTokenResolver {
     loginTiDBCloud(user, password, driver);
 
     // wait the page to redirect
-    WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10),
+    WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(15),
         Duration.ofMillis(500));
     webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".ui.button")));
 
@@ -91,6 +91,15 @@ public class AuthTokenResolver {
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
     options.setCapability("goog:loggingPrefs", logPrefs);
-    return new ChromeDriver(options);
+    ClassLoader current = Thread.currentThread().getContextClassLoader();
+    ChromeDriver chromeDriver;
+    try {
+      Thread.currentThread().setContextClassLoader(ChromeDriver.class.getClassLoader());
+      // code working with ServiceLoader here
+      chromeDriver =  new ChromeDriver(options);
+    } finally {
+      Thread.currentThread().setContextClassLoader(current);
+    }
+    return chromeDriver;
   }
 }
