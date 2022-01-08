@@ -13,7 +13,7 @@ public class SettingBar extends DumbAwareAction {
     private final ViewBars panel;
 
     public SettingBar(ViewBars panel) {
-        super("Setting", "Click to setting", AllIcons.Modules.AddExcludedRoot);
+        super("Setting", "Click to setting", IconLoader.getIcon("/icons/config.svg"));
         this.panel = panel;
     }
 

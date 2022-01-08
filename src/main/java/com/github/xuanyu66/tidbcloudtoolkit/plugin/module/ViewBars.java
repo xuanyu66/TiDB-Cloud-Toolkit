@@ -8,11 +8,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.JBSplitter;
 
-/**
- * @description: 窗体面板
- * @author: 小傅哥 | 微信：fustack 公众号：bugstack虫洞栈
- * @github: https://github.com/fuzhengwei
- */
 public class ViewBars extends SimpleToolWindowPanel {
 
     private Project project;

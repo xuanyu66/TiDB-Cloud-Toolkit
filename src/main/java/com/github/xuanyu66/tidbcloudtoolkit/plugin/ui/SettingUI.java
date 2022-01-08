@@ -1,9 +1,5 @@
 package com.github.xuanyu66.tidbcloudtoolkit.plugin.ui;
 
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
-import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitService;
-import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitServiceImpl;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts;
@@ -12,19 +8,28 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.List;
 
 public class SettingUI implements Configurable {
     private JPanel mainPanel;
     private JTextField usernameTextField;
     private JTextField passwordTextField;
-    private JButton loginButton;
+    private JButton testConnectionButton;
+    private JTextField tokenTextField;
 
     private TiCloudUI tiCloudUI;
 
+    /**
+     * test connection
+     * @param tiCloudUI
+     */
     public SettingUI(TiCloudUI tiCloudUI){
         this.tiCloudUI = tiCloudUI;
+        testConnectionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
 
@@ -55,8 +60,13 @@ public class SettingUI implements Configurable {
         return true;
     }
 
+    /**
+     * apply info
+     * @throws ConfigurationException
+     */
     @Override
     public void apply() throws ConfigurationException {
-
+        String tokenStr = tokenTextField.getText().trim();
+        System.out.println(tokenStr);
     }
 }
