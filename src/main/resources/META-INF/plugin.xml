@@ -8,7 +8,6 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.xuanyu66.tidbcloudtoolkit.plugin.factory.TiCloudFactory" id="TidbCloudToolkit" anchor="right" secondary="false"/>
-        <projectConfigurable instance="com.github.xuanyu66.tidbcloudtoolkit.plugin.factory.SettingFactory" id="tidb-cloud-toolkit.setting" displayName="TiDB Cloud Toolkit"/>
     </extensions>
     <actions>
         <action id="TestAction"
