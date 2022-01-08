@@ -52,4 +52,6 @@ public interface TiDBCloudToolkitService {
    * @return
    */
   List<ClusterWrapper> listCluster() throws IOException;
+
+  String getConnection(ClustersSummary clustersSummary);
 }

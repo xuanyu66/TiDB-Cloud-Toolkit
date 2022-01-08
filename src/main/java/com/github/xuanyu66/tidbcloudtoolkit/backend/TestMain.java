@@ -1,20 +1,20 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend;
 
+import com.github.xuanyu66.tidbcloudtoolkit.plugin.service.DataService;
 import java.io.IOException;
 
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitServiceImpl;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.List;
 
 //TODO to delete
 public class TestMain {
 
   public static void main(String[] args) throws IOException {
-    TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("cs68614@gmail.com", "Xiaosong66");
-    for (ClusterWrapper clusterWrapper : toolkitService.listCluster()) {
-      System.out.println(clusterWrapper.getCluster().getId());
-    }
+    TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("", "");
+    List<ClusterWrapper> clusterWrappers = toolkitService.listCluster();
+    ClusterWrapper clusterWrapper = clusterWrappers.get(0);
+    toolkitService.getConnection(clusterWrapper.getClustersSummary());
 
 //    BaseHttpClient baseHttpClient = BaseHttpClient.newBuilder().withUserName("mockName")
 //        .withPassword("mockPassword")

@@ -6,6 +6,7 @@ import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Connection;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Orginzation;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ProjectList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Traffic;
@@ -114,4 +115,25 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
       return new ClusterWrapper(clustersSummary, cluster);
     }).collect(Collectors.toList());
   }
+
+  @Override
+  public String getConnection(ClustersSummary clustersSummary) {
+    Cluster cluster = getCluster(clustersSummary).getCluster();
+    String host = cluster.getEndpoint().getAddress();
+    int port = cluster.getEndpoint().getPort();
+    //commandLine
+    String commandLine = String.format(Connection.COMMADNLINE, host, port);
+    //springboot properties
+    String springBootProperties = String.format(Connection.SPRINGBOOT_PROPERTIES, host, port);
+    //springboot yaml
+    String springBootYMAL = String.format(Connection.SPRINGBOOT_YMAL, host, port);
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("#commandLine\n").append(commandLine).append("\n\n")
+        .append("#springboot properties\n").append(springBootProperties).append("\n\n")
+        .append("#springboot yaml\n").append(springBootYMAL);
+    return sb.toString();
+  }
+
+
 }
