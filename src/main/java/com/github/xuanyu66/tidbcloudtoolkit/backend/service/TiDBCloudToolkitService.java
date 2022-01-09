@@ -54,5 +54,5 @@ public interface TiDBCloudToolkitService {
    */
   List<ClusterWrapper> listCluster() throws IOException;
 
-  List<Link> getConnection(ClustersSummary clustersSummary);
+  Link getConnection(ClustersSummary clustersSummary);
 }

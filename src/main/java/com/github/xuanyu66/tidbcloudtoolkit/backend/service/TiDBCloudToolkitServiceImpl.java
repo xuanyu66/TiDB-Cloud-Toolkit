@@ -118,7 +118,7 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
   }
 
   @Override
-  public List<Link> getConnection(ClustersSummary clustersSummary) {
+  public Link getConnection(ClustersSummary clustersSummary) {
     Cluster cluster = getCluster(clustersSummary).getCluster();
     String host = cluster.getEndpoint().getAddress();
     int port = cluster.getEndpoint().getPort();
@@ -133,24 +133,12 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
     //springboot yaml
     String springBootYMAL = String.format(Connection.SPRINGBOOT_YMAL, password, host, port);
 
-    List<Link> links= new ArrayList<>();
-    Link link1 = new Link();
-    link1.setName("commandLine");
-    link1.setContent(commandLine);
-    Link link2 = new Link();
-    link2.setName("dsn");
-    link2.setContent(dsn);
-    Link link3 = new Link();
-    link3.setName("springboot properties");
-    link3.setContent(springBootProperties);
-    Link link4 = new Link();
-    link4.setName("springboot yaml");
-    link4.setContent(springBootYMAL);
-    links.add(link1);
-    links.add(link2);
-    links.add(link3);
-    links.add(link4);
-    return links;
+    Link link = new Link();
+    link.setCommandLine(commandLine);
+    link.setDsn(dsn);
+    link.setSpringBootYMAL(springBootYMAL);
+    link.setSpringBootProperties(springBootProperties);
+    return link;
   }
 
 
