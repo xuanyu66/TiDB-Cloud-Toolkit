@@ -63,9 +63,9 @@ public class TiCloudUI {
       }
 
       // 不显示 org id，project id， cluster id
-      table1.removeColumn(table1.getColumnModel().getColumn(0));
-      table1.removeColumn(table1.getColumnModel().getColumn(1));
       table1.removeColumn(table1.getColumnModel().getColumn(2));
+      table1.removeColumn(table1.getColumnModel().getColumn(1));
+      table1.removeColumn(table1.getColumnModel().getColumn(0));
       JTableUtils.setTableStyle(table1);
     });
 

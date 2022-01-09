@@ -3,26 +3,21 @@ package com.github.xuanyu66.tidbcloudtoolkit.plugin.module;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import javax.swing.table.AbstractTableModel;
 
 public class ClusterTableModel extends AbstractTableModel {
 
   protected static String[] COLUMN_NAMES = {"Org Id", "Project Id", "Cluster Id", "Cluster Name",
-      "Status",
-      "Secondary Status", "Version", "Provider", "Region", "Profile Name", "Created At",
-      "Create Progress", "Prometheus Ready", "Selected"};
+      "Status", "Secondary Status", "Version", "Provider", "Region", "Profile Name", "Created At",
+      "Create Progress", "Prometheus Ready"};
   protected static Class[] COLUMN_CLASSES = {String.class, String.class, String.class, String.class,
       String.class, String.class, String.class, String.class, String.class, String.class,
-      String.class, String.class, Boolean.class, Boolean.class};
+      String.class, String.class, Boolean.class};
 
-  private Set<Integer> selected;
   private List<ClusterWrapper> clusters;
 
   public ClusterTableModel() {
     clusters = new ArrayList<>(25);
-    selected = new TreeSet<Integer>();
   }
 
   @Override
@@ -47,7 +42,7 @@ public class ClusterTableModel extends AbstractTableModel {
 
   @Override
   public boolean isCellEditable(int rowIndex, int columnIndex) {
-    return columnIndex == 13;
+    return false;
   }
 
   @Override
@@ -83,24 +78,6 @@ public class ClusterTableModel extends AbstractTableModel {
 
     }
     return null;
-  }
-
-  @Override
-  public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    if (columnIndex != 13) {
-      return;
-    }
-    if (!(aValue instanceof Boolean)) {
-      return;
-    }
-    boolean isSelected = (Boolean) aValue;
-    if (isSelected) {
-      selected.add(rowIndex);
-    } else {
-      selected.remove(rowIndex);
-    }
-
-    fireTableCellUpdated(rowIndex, columnIndex);
   }
 
   public void add(ClusterWrapper cluster) {
