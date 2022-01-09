@@ -18,7 +18,7 @@ public class TiCloudFactory implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         ViewBars viewPanel = new ViewBars(project);
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(viewPanel, "TiCloudToolkit", false);
+        Content content = contentFactory.createContent(viewPanel, "", false);
         toolWindow.getContentManager().addContent(content, 0);
 
 //        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();

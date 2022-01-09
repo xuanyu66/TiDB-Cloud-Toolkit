@@ -80,4 +80,8 @@ public class DataService implements PersistentStateComponent<DataState> {
   public Link getConfig(ClustersSummary clustersSummary) {
     return toolkitService.getConnection(clustersSummary);
   }
+  
+  public boolean setTrafficFilter(boolean all, ClustersSummary clustersSummary) {
+    return toolkitService.setTrafficFilter(all, clustersSummary);
+  }
 }
