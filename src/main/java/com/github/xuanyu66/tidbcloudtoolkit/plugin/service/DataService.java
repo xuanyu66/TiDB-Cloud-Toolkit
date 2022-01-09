@@ -75,4 +75,8 @@ public class DataService implements PersistentStateComponent<DataState> {
   public boolean deleteCluster(ClustersSummary clustersSummary) {
     return toolkitService.deleteCluster(clustersSummary);
   }
+
+  public boolean setTrafficFilter(boolean all, ClustersSummary clustersSummary) {
+    return toolkitService.setTrafficFilter(all, clustersSummary);
+  }
 }
