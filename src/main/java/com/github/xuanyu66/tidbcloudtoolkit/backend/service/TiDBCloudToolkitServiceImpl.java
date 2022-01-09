@@ -6,6 +6,8 @@ import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.Connection;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Link;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Orginzation;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ProjectList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Traffic;
@@ -114,4 +116,30 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
       return new ClusterWrapper(clustersSummary, cluster);
     }).collect(Collectors.toList());
   }
+
+  @Override
+  public Link getConnection(ClustersSummary clustersSummary) {
+    Cluster cluster = getCluster(clustersSummary).getCluster();
+    String host = cluster.getEndpoint().getAddress();
+    int port = cluster.getEndpoint().getPort();
+    String password = "${your password}";
+    //commandLine
+    String commandLine = String.format(Connection.COMMADNLINE, host, port, password);
+    //dsn
+    String dsn = String.format(Connection.DSN, password, host, port);
+    //springboot properties
+    String springBootProperties = String.format(Connection.SPRINGBOOT_PROPERTIES, host, port,
+        password);
+    //springboot yaml
+    String springBootYMAL = String.format(Connection.SPRINGBOOT_YMAL, password, host, port);
+
+    Link link = new Link();
+    link.setCommandLine(commandLine);
+    link.setDsn(dsn);
+    link.setSpringBootYMAL(springBootYMAL);
+    link.setSpringBootProperties(springBootProperties);
+    return link;
+  }
+
+
 }

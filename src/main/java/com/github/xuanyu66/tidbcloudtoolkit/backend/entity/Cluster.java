@@ -1,5 +1,7 @@
 package com.github.xuanyu66.tidbcloudtoolkit.backend.entity;
 
+import java.util.Map;
+
 public class Cluster {
 
   private String id;
@@ -13,6 +15,39 @@ public class Cluster {
   private String created_at;
   private String create_progress;
   private boolean prometheus_ready;
+  private Endpoint endpoint;
+
+  public class Endpoint {
+
+    private boolean ready;
+    private String address;
+    private int port;
+
+    public boolean isReady() {
+      return ready;
+    }
+
+    public void setReady(boolean ready) {
+      this.ready = ready;
+    }
+
+    public String getAddress() {
+      return address;
+    }
+
+    public void setAddress(String address) {
+      this.address = address;
+    }
+
+    public int getPort() {
+      return port;
+    }
+
+    public void setPort(int port) {
+      this.port = port;
+    }
+  }
+
 
   public String getId() {
     return id;
@@ -100,5 +135,13 @@ public class Cluster {
 
   public void setPrometheus_ready(boolean prometheus_ready) {
     this.prometheus_ready = prometheus_ready;
+  }
+
+  public Endpoint getEndpoint() {
+    return endpoint;
+  }
+
+  public void setEndpoint(Endpoint endpoint) {
+    this.endpoint = endpoint;
   }
 }

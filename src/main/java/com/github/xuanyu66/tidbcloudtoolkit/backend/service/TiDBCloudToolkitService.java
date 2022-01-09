@@ -3,6 +3,7 @@ package com.github.xuanyu66.tidbcloudtoolkit.backend.service;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Link;
 import java.io.IOException;
 import java.util.List;
 
@@ -52,4 +53,6 @@ public interface TiDBCloudToolkitService {
    * @return
    */
   List<ClusterWrapper> listCluster() throws IOException;
+
+  Link getConnection(ClustersSummary clustersSummary);
 }
