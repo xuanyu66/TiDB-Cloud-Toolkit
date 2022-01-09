@@ -41,19 +41,17 @@ public class TiCloudUI {
   private JPanel create;
 
   public TiCloudUI() {
-    createAClusterButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        ClusterVO clusterVO = new ClusterVO();
-        clusterVO.setName(nameTextField.getText().trim());
-        clusterVO.setRoot_password(passwordField.getText().trim());
-        try {
-          DataService.getDataService().createCluster(clusterVO);
-          JOptionPane.showMessageDialog(null, "创建成功");
-        } catch (Exception ex) {
-          JOptionPane.showMessageDialog(null, ex.getMessage(), "创建失败",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
+    createAClusterButton.addActionListener(e -> {
+      ClusterVO clusterVO = new ClusterVO();
+      clusterVO.setName(nameTextField.getText().trim());
+      clusterVO.setRoot_password(passwordField.getText().trim());
+      try {
+        DataService.getDataService().createCluster(clusterVO);
+        JOptionPane.showMessageDialog(null, "创建成功");
+
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "创建失败",
+            JOptionPane.INFORMATION_MESSAGE);
       }
     });
 
@@ -92,45 +90,42 @@ public class TiCloudUI {
       table1.clearSelection();
     });
 
-    setTrafficFiltersButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        int selectedRow = table1.getSelectedRow();
-        String orgId = table1.getModel().getValueAt(selectedRow, 0).toString();
-        String projectId = table1.getModel().getValueAt(selectedRow, 1).toString();
-        String clusterId = table1.getModel().getValueAt(selectedRow, 2).toString();
-        ClustersSummary clustersSummary = new ClustersSummary();
-        clustersSummary.setOrgId(orgId);
-        clustersSummary.setProjectId(projectId);
-        clustersSummary.setClusterId(clusterId);
+    setTrafficFiltersButton.addActionListener(e -> {
+      int selectedRow = table1.getSelectedRow();
+      String orgId = table1.getModel().getValueAt(selectedRow, 0).toString();
+      String projectId = table1.getModel().getValueAt(selectedRow, 1).toString();
+      String clusterId = table1.getModel().getValueAt(selectedRow, 2).toString();
+      ClustersSummary clustersSummary = new ClustersSummary();
+      clustersSummary.setOrgId(orgId);
+      clustersSummary.setProjectId(projectId);
+      clustersSummary.setClusterId(clusterId);
 
-        JBPopupFactory instance = JBPopupFactory.getInstance();
-        // 创建需要执行的任务
-        Runnable all = () -> {
-          try {
-            DataService.getDataService().setTrafficFilter(true, clustersSummary);
-            JOptionPane.showMessageDialog(null, "设置成功");
-          } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "设置失败",
-                JOptionPane.ERROR_MESSAGE);
-          }
-        };
-        Runnable myIp = () -> {
-          try {
-            DataService.getDataService().setTrafficFilter(false, clustersSummary);
-            JOptionPane.showMessageDialog(null, "设置成功");
-          } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "设置失败",
-                JOptionPane.ERROR_MESSAGE);
-          }
-        };
-        ListPopup popup = instance.createConfirmation("Traffic Filter", "All", "Only myIp", all,
-            myIp, 1);
-        popup.setSize(new Dimension(200,70));
-        popup.showInFocusCenter();
-        table1.clearSelection();
+      JBPopupFactory instance = JBPopupFactory.getInstance();
+      // 创建需要执行的任务
+      Runnable all = () -> {
+        try {
+          DataService.getDataService().setTrafficFilter(true, clustersSummary);
+          JOptionPane.showMessageDialog(null, "设置成功");
+        } catch (Exception ex) {
+          JOptionPane.showMessageDialog(null, ex.getMessage(), "设置失败",
+              JOptionPane.ERROR_MESSAGE);
+        }
+      };
+      Runnable myIp = () -> {
+        try {
+          DataService.getDataService().setTrafficFilter(false, clustersSummary);
+          JOptionPane.showMessageDialog(null, "设置成功");
+        } catch (Exception ex) {
+          JOptionPane.showMessageDialog(null, ex.getMessage(), "设置失败",
+              JOptionPane.ERROR_MESSAGE);
+        }
+      };
+      ListPopup popup = instance.createConfirmation("Traffic Filter", "All", "Only myIp", all,
+          myIp, 1);
+      popup.setSize(new Dimension(200,70));
+      popup.showInFocusCenter();
+      table1.clearSelection();
 
-      }
     });
     TiCloudTabbedPane.addComponentListener(new ComponentAdapter() {
     });
