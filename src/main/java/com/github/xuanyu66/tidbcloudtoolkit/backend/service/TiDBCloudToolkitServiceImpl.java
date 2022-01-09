@@ -6,7 +6,8 @@ import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
-import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Connection;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.constant.Connection;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Link;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Orginzation;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ProjectList;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Traffic;
@@ -117,22 +118,39 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
   }
 
   @Override
-  public String getConnection(ClustersSummary clustersSummary) {
+  public List<Link> getConnection(ClustersSummary clustersSummary) {
     Cluster cluster = getCluster(clustersSummary).getCluster();
     String host = cluster.getEndpoint().getAddress();
     int port = cluster.getEndpoint().getPort();
+    String password = "${your password}";
     //commandLine
-    String commandLine = String.format(Connection.COMMADNLINE, host, port);
+    String commandLine = String.format(Connection.COMMADNLINE, host, port, password);
+    //dsn
+    String dsn = String.format(Connection.DSN, password, host, port);
     //springboot properties
-    String springBootProperties = String.format(Connection.SPRINGBOOT_PROPERTIES, host, port);
+    String springBootProperties = String.format(Connection.SPRINGBOOT_PROPERTIES, host, port,
+        password);
     //springboot yaml
-    String springBootYMAL = String.format(Connection.SPRINGBOOT_YMAL, host, port);
+    String springBootYMAL = String.format(Connection.SPRINGBOOT_YMAL, password, host, port);
 
-    StringBuilder sb = new StringBuilder();
-    sb.append("#commandLine\n").append(commandLine).append("\n\n")
-        .append("#springboot properties\n").append(springBootProperties).append("\n\n")
-        .append("#springboot yaml\n").append(springBootYMAL);
-    return sb.toString();
+    List<Link> links= new ArrayList<>();
+    Link link1 = new Link();
+    link1.setName("commandLine");
+    link1.setContent(commandLine);
+    Link link2 = new Link();
+    link2.setName("dsn");
+    link2.setContent(dsn);
+    Link link3 = new Link();
+    link3.setName("springboot properties");
+    link3.setContent(springBootProperties);
+    Link link4 = new Link();
+    link4.setName("springboot yaml");
+    link4.setContent(springBootYMAL);
+    links.add(link1);
+    links.add(link2);
+    links.add(link3);
+    links.add(link4);
+    return links;
   }
 
 
