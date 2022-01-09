@@ -3,6 +3,7 @@ package com.github.xuanyu66.tidbcloudtoolkit.plugin.service;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.Link;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitService;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitServiceImpl;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -76,6 +77,10 @@ public class DataService implements PersistentStateComponent<DataState> {
     return toolkitService.deleteCluster(clustersSummary);
   }
 
+  public Link getConfig(ClustersSummary clustersSummary) {
+    return toolkitService.getConnection(clustersSummary);
+  }
+  
   public boolean setTrafficFilter(boolean all, ClustersSummary clustersSummary) {
     return toolkitService.setTrafficFilter(all, clustersSummary);
   }

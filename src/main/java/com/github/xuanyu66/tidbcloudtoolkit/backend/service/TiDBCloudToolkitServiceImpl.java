@@ -124,7 +124,7 @@ public class TiDBCloudToolkitServiceImpl implements TiDBCloudToolkitService {
     int port = cluster.getEndpoint().getPort();
     String password = "${your password}";
     //commandLine
-    String commandLine = String.format(Connection.COMMADNLINE, host, port, password);
+    String commandLine = String.format(Connection.COMMADNLINE, host, port);
     //dsn
     String dsn = String.format(Connection.DSN, password, host, port);
     //springboot properties

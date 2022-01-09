@@ -2,7 +2,7 @@ package com.github.xuanyu66.tidbcloudtoolkit.backend.constant;
 
 public class Connection {
 
-  public static final String COMMADNLINE = "mysql -u root -h %s -P %s -p %s";
+  public static final String COMMADNLINE = "mysql -u root -h %s -P %s -p";
 
   public static final String SPRINGBOOT_YMAL = "spring:\n"
       + "  datasource:\n"
