@@ -11,7 +11,7 @@ import java.util.List;
 public class TestMain {
 
   public static void main(String[] args) throws IOException {
-    TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("1136742008@qq.com", "shiyuhangA1");
+    TiDBCloudToolkitServiceImpl toolkitService = new TiDBCloudToolkitServiceImpl("", "");
     List<ClusterWrapper> clusterWrappers = toolkitService.listCluster();
     ClusterWrapper clusterWrapper = clusterWrappers.get(0);
     toolkitService.getConnection(clusterWrapper.getClustersSummary());
