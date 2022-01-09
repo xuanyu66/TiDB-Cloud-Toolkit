@@ -2,9 +2,9 @@ package com.github.xuanyu66.tidbcloudtoolkit.plugin.service;
 
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitService;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.service.TiDBCloudToolkitServiceImpl;
-import com.github.xuanyu66.tidbcloudtoolkit.backend.util.GsonUtil;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.ServiceManager;
@@ -12,10 +12,9 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 @Service
 @State(name = "DataService", storages = @Storage("plugin.xml"))
@@ -71,5 +70,9 @@ public class DataService implements PersistentStateComponent<DataState> {
       e.printStackTrace();
     }
     return Collections.emptyList();
+  }
+
+  public boolean deleteCluster(ClustersSummary clustersSummary) {
+    return toolkitService.deleteCluster(clustersSummary);
   }
 }
