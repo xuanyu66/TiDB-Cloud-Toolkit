@@ -2,6 +2,7 @@ package com.github.xuanyu66.tidbcloudtoolkit.plugin.ui;
 
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterVO;
 import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClusterWrapper;
+import com.github.xuanyu66.tidbcloudtoolkit.backend.entity.ClustersSummary;
 import com.github.xuanyu66.tidbcloudtoolkit.plugin.JTableUtils;
 import com.github.xuanyu66.tidbcloudtoolkit.plugin.module.ClusterTableModel;
 import com.github.xuanyu66.tidbcloudtoolkit.plugin.service.DataService;
@@ -53,12 +54,38 @@ public class TiCloudUI {
     });
 
     refreshButton.addActionListener(e -> {
-      List<ClusterWrapper> clusterWrappers = DataService.getDataService().listClusters();
-      ClusterWrapper clusterWrapper = clusterWrappers.get(0);
       ClusterTableModel model = new ClusterTableModel();
       table1.setModel(model);
-      model.add(clusterWrapper.getCluster());
+      List<ClusterWrapper> clusterWrappers = DataService.getDataService().listClusters();
+      for (int i = 0; i < clusterWrappers.size(); i++) {
+        ClusterWrapper clusterWrapper = clusterWrappers.get(i);
+        model.add(clusterWrapper);
+      }
+
+      // 不显示 org id，project id， cluster id
+      table1.removeColumn(table1.getColumnModel().getColumn(2));
+      table1.removeColumn(table1.getColumnModel().getColumn(1));
+      table1.removeColumn(table1.getColumnModel().getColumn(0));
       JTableUtils.setTableStyle(table1);
+    });
+
+    deleteClusterButton.addActionListener(e -> {
+      int selectedRow = table1.getSelectedRow();
+      String orgId = table1.getModel().getValueAt(selectedRow, 0).toString();
+      String projectId = table1.getModel().getValueAt(selectedRow, 1).toString();
+      String clusterId = table1.getModel().getValueAt(selectedRow, 2).toString();
+      ClustersSummary clustersSummary = new ClustersSummary();
+      clustersSummary.setOrgId(orgId);
+      clustersSummary.setProjectId(projectId);
+      clustersSummary.setClusterId(clusterId);
+      try {
+        DataService.getDataService().deleteCluster(clustersSummary);
+        JOptionPane.showMessageDialog(null, "删除成功");
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "删除失败",
+            JOptionPane.ERROR_MESSAGE);
+      }
+      table1.clearSelection();
     });
   }
 
