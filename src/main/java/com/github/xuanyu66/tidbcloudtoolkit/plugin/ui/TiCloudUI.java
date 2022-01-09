@@ -23,12 +23,9 @@ public class TiCloudUI {
   private JPanel mainPanel;
   private JTabbedPane TiCloudTabbedPane;
   private JPanel onePanel;
-  private JPanel twoPanel;
-  private JPanel threePanel;
   private JButton createAClusterButton;
   private JTable table1;
   private JButton refreshButton;
-  private JPanel refresh;
   private JButton deleteClusterButton;
   private JButton setTrafficFiltersButton;
   private JButton generateConfigButton;
